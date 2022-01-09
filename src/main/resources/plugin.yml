@@ -1,0 +1,6 @@
+name: DiscordWhitelist
+version: '${project.version}'
+main: gq.zielinus.discordwhitelist.DiscordWhitelist
+authors: [ Zielino ]
+description: A plugin that adds a player to the whitelist by entering the nickname on a specified channel.
+website: https://www.zielinus.gq
