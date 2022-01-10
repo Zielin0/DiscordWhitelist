@@ -59,17 +59,21 @@ public class DiscordEventListener extends ListenerAdapter {
 
         if (channel.getName().equalsIgnoreCase(plugin.getRegisterChannel()) && !event.getAuthor().isBot() && !repliedTo.contains(event.getMessage())) {
             String messageToSend;
+            String reactionToSend;
 
             String message = event.getMessage().getContentRaw();
             boolean validIGN = message.length() <= 16 && message.split(" ").length == 1;
 
             if (!validIGN) {
                 messageToSend = "Invalid minecraft IGN. Try again later.";
+                reactionToSend = "U+2757";
             } else {
                 if (plugin.isRegistered(message)) {
                     messageToSend = "You've already registered!";
+                    reactionToSend = "U+274C";
                 } else {
                     messageToSend = "You've registered and added to whitelist! :sunglasses:";
+                    reactionToSend = "U+1F60E";
                     plugin.registerIGN(message);
                 }
             }
@@ -78,7 +82,7 @@ public class DiscordEventListener extends ListenerAdapter {
 
             channel.sendMessage(Objects.requireNonNull(event.getMember()).getAsMention() + ", " + messageToSend).queue();
 
-            channel.addReactionById(event.getMessageId(), "U+1F60E").queue();
+            channel.addReactionById(event.getMessageId(), reactionToSend).queue();
 
             Role whitelistedRole = plugin.getOrCreateWhitelistedRle();
             event.getGuild().addRoleToMember(event.getMember(), whitelistedRole).queue();

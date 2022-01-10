@@ -1,3 +1,4 @@
+# default config.yml
 BOT_TOKEN: 123456
 register-channel: "testing"
 discord-server-name: "piwnica zielina"

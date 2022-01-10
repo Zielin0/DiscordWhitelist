@@ -55,7 +55,7 @@ public final class DiscordWhitelist extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        System.out.println(ChatColor.RED + "DiscordWhitelist disabled!");
+        getLogger().severe(ChatColor.RED + "DiscordWhitelist disabled!");
         discordBot.shutdown();
     }
 
