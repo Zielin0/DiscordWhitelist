@@ -39,8 +39,8 @@ public final class DiscordWhitelist extends JavaPlugin {
 
         String botToken = getConfig().getString("BOT_TOKEN");
         if (botToken == null) {
-            getServer().getPluginManager().disablePlugin(this);
             getLogger().severe(ChatColor.RED + "Please provide a BOT_TOKEN in the config.yml file.");
+            getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
