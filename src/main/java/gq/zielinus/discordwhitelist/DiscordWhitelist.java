@@ -10,13 +10,12 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public final class DiscordWhitelist extends JavaPlugin {
 
@@ -28,18 +27,20 @@ public final class DiscordWhitelist extends JavaPlugin {
     private Guild discordServer;
 
     private List<String> igns = new ArrayList<>();
+    
+    public Logger logger = Bukkit.getLogger();
 
     @SneakyThrows
     @Override
     public void onEnable() {
         super.onEnable();
-        getLogger().info(ChatColor.LIGHT_PURPLE + "DiscordWhitelist enabled!");
+        logger.info("DiscordWhitelist enabled!");
 
         saveDefaultConfig();
 
         String botToken = getConfig().getString("BOT_TOKEN");
         if (botToken == null) {
-            getLogger().severe(ChatColor.RED + "Please provide a BOT_TOKEN in the config.yml file.");
+            logger.warning("Please provide a BOT_TOKEN in the config.yml file.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -55,13 +56,15 @@ public final class DiscordWhitelist extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().severe(ChatColor.RED + "DiscordWhitelist disabled!");
+        logger.severe("DiscordWhitelist disabled!");
         discordBot.shutdown();
     }
 
     public String getRegisterChannel() {
         return getConfigOptionOrDefault("register-channel", "test");
     }
+
+    public String getHexColor() { return getConfigOptionOrDefault("hex-color", "#ff32a7"); }
 
     private String getConfigOptionOrDefault(String key, String defaultValue) {
         String name = getConfig().getString(key);
@@ -91,7 +94,7 @@ public final class DiscordWhitelist extends JavaPlugin {
     }
 
     public Role getOrCreateWhitelistedRle() {
-        return getOrCreateRole(getWhitelistedRoleName(), "#ff32a7");
+        return getOrCreateRole(getWhitelistedRoleName(), getHexColor());
     }
 
     private Role getOrCreateRole(String name, String hexColor) {

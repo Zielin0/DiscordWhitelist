@@ -1,5 +1,6 @@
 # default config.yml
-BOT_TOKEN: 123456
-register-channel: "testing"
-discord-server-name: "piwnica zielina"
+BOT_TOKEN: "123456"
+register-channel: "Channel Name"
+discord-server-name: "Server Name"
 role-name: "whitelisted"
+hex-color: "#213769"

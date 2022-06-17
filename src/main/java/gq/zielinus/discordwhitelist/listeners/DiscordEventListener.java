@@ -74,6 +74,7 @@ public class DiscordEventListener extends ListenerAdapter {
                 } else {
                     messageToSend = "You've registered and added to whitelist! :sunglasses:";
                     reactionToSend = "U+1F60E";
+                    Bukkit.getLogger().info(message + " has registered to whitelist.");
                     plugin.registerIGN(message);
                 }
             }
